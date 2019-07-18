@@ -1,5 +1,4 @@
 import React from 'react';
-import {Link} from 'react-router-dom';
 import '../ProductList/ProductList.css'
 
 export default function ProductList(props){
@@ -29,7 +28,6 @@ export default function ProductList(props){
                             </tbody>
                         </table>
             </div>
-            <Link to="/add">Go to add</Link>
         </div>
     );
 };
