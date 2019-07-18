@@ -1,0 +1,30 @@
+
+.flex-container{
+    display: flex;
+    justify-content: center;
+}
+
+table {
+    width: 90%;
+    border: 1px solid black;
+    overflow-y: scroll;
+    margin-top: 50px;
+    border-collapse: collapse;
+  }
+  
+  th {
+    height: 50px;
+    border: 1px solid black;
+    padding: 15px;
+    text-align: left;
+  }
+  td {
+    height: 50px;
+    border: 1px solid black;
+    padding: 15px;
+    text-align: left;
+}
+
+tr:hover {background-color: rgb(233, 229, 220);}
+
+

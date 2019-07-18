@@ -1,0 +1,26 @@
+.searchbar-button{
+    padding: 7px;
+    transition: 0.3s ease;
+    margin-left: 8px;
+    margin-top: 10px;
+}
+
+.scroll-table{
+    height: 700px;
+    width: 100%;
+    overflow-y: scroll;
+}
+
+::-webkit-scrollbar {
+    width: 0px;
+    background: transparent; /* make scrollbar transparent */
+}
+
+.searchbar-button:hover{
+    padding: 15px;
+}
+
+.searchbar-input{
+    padding: .4rem;
+    margin-top: 10px;
+}
