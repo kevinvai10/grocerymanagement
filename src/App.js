@@ -2,8 +2,10 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import Searchbar from './components/Searchbar/Searchbar';
 import ProductAdd from './components/ProductAdd/ProductAdd';
-
+import ProductUpdate from './components/productUpdate/ProductUpdate'
+import Nav from './components/nav/Nav';
 import './App.css';
+import ProductList from './components/ProductList/ProductList';
 
 function App() {
   return (
@@ -12,9 +14,10 @@ function App() {
         <h1>Shopping cart</h1>
       </header>
       <Router>
-      <Link to="/add">Go to add</Link>
-      <Route exact path="/" component={Searchbar}/>
-      <Route exact path="/add" component={ProductAdd}/>  
+        <Nav />
+        <Route exact path="/" component={ProductList}/>
+        <Route exact path="/add" component={ProductAdd}/>  
+        <Route exact path="/update" component={ProductUpdate}/>  
       </Router>
     </div>
   );
