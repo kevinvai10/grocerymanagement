@@ -7,6 +7,7 @@ const Nav = () => {
         <div className="nav-container">
             <Link to="/add">Go to add</Link>
             <Link to="/update">Go to edit</Link>
+            <Link to="/meals">Meal picker</Link>
         </div>
     )
 }
