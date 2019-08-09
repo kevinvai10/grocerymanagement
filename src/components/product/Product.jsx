@@ -1,5 +1,4 @@
-import React, {useState} from 'react'
-
+import React from 'react'
 
 class Product extends React.Component{
     constructor(props){
@@ -22,6 +21,9 @@ class Product extends React.Component{
         handleEdit = () => {
             this.props.edit(this.props.product.product_id, this.state.newPrice);
             this.setState({isEdit: false})
+        }
+        handleDelete = () => {
+            this.props.delete(this.props.product.product_id);
         }
     render(){
         const {product} = this.props;
@@ -50,6 +52,7 @@ class Product extends React.Component{
                         :
                         <button onClick={() => this.setState({isEdit: true})}>Edit price</button>
                     }
+                    <button onClick={this.handleDelete}>x</button>
                 </td>
             </tr>
         )

@@ -1,7 +1,7 @@
 import React from 'react';
 import Product from '../product/Product';
 import SearchBar from '../Searchbar/Searchbar';
-import {getProducts, editProductPrice} from '../../utils/apicalls';
+import {getProducts, editProductPrice, deleteProduct} from '../../utils/apicalls';
 import '../ProductList/ProductList.css';
 
 class ProductList extends React.Component{
@@ -19,6 +19,7 @@ class ProductList extends React.Component{
         this.incrementCartItem = this.incrementCartItem.bind(this);
         this.decrementCartItem = this.decrementCartItem.bind(this);
         this.edit = this.edit.bind(this);
+        this.delete = this.delete.bind(this);
     }
 
     calculateCartTotal(){
@@ -101,8 +102,19 @@ class ProductList extends React.Component{
                 })
             })
         });
-        
     }
+
+    delete(id){
+        //Call api
+        deleteProduct(id).then(res => {
+            getProducts().then(products => {
+                this.setState({
+                    products: products
+                })
+            })
+        })
+    }
+
     searchChange(value){
         this.setState({search: value})
     }
@@ -147,6 +159,7 @@ class ProductList extends React.Component{
                                                 decrementCartItem={this.decrementCartItem} 
                                                 incrementCartItem={this.incrementCartItem} 
                                                 edit={this.edit}
+                                                delete={this.delete}
                                                 onClick={this.handleClick} 
                                             />
                                             )
