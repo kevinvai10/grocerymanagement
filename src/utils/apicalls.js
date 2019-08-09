@@ -1,7 +1,8 @@
-import {getProductsUrl, addProductUrl, editProductUrl, deleteProductUrl} from './routes';
+import {getProductsUrl, addProductUrl, editProductUrl, deleteProductUrl,getStoresUrl, getCategoriesUrl} from './routes';
 //returns array of products
 const getProducts = () => fetch(getProductsUrl).then(response => response.json());
-
+const getCategories = () => fetch(getCategoriesUrl).then(response => response.json());
+const getStores = () => fetch(getStoresUrl).then(response => response.json());
 //adds product to db
 const addProduct = (data) => {
     return fetch(addProductUrl , {
@@ -39,6 +40,8 @@ const deleteProduct = (id) => {
 
 export {
     getProducts,
+    getCategories,
+    getStores,
     addProduct,
     editProductPrice,
     deleteProduct

@@ -121,6 +121,7 @@ class ProductList extends React.Component{
 
     componentDidMount(){
         getProducts().then(products => {
+            console.log('current products:' , products);
             this.setState({
                 products: products
             })
@@ -154,7 +155,7 @@ class ProductList extends React.Component{
                                     {
                                         products && filteredProducts.map(product => (
                                             <Product 
-                                                key={product.product_id} 
+                                                key={product.id} 
                                                 product={product} 
                                                 decrementCartItem={this.decrementCartItem} 
                                                 incrementCartItem={this.incrementCartItem} 

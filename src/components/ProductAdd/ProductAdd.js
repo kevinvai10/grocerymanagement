@@ -1,16 +1,15 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
-import {addProduct} from '../../utils/apicalls';
+import {addProduct, getStores, getCategories} from '../../utils/apicalls';
 import 'tachyons';
-
 class ProductAdd extends Component{
     constructor(){
         super();
         this.state = {
             product_name: "",
             product_price: "",
-            product_store: "",
-            product_category: "",
+            categories: "",
+            stores: "",
         }
 
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -29,11 +28,14 @@ class ProductAdd extends Component{
     }
 
     handleStoreChange(event) {
-        this.setState({product_store: event.target.value});
+        const selectedStore = this.state.stores.find(store => store.store_name === event.target.value);
+        this.setState({product_store: selectedStore.store_name, product_storeid: selectedStore.id});
     }
 
     handleCategoryChange(event) {
-        this.setState({product_category: event.target.value});
+        //check what we got
+        const selectedCategory = this.state.categories.find(category => category.category_name === event.target.value);
+        this.setState({product_category: selectedCategory.category_name, product_categoryid: selectedCategory.id});
     }
 
     handleSubmit(event){
@@ -42,8 +44,8 @@ class ProductAdd extends Component{
         const newProduct = {
                 name: this.state.product_name,
                 price: this.state.product_price,
-                store: this.state.product_store,
-                category: this.state.product_category,
+                store: this.state.product_storeid,
+                category: this.state.product_categoryid,
         }
 
         addProduct(newProduct).then(response => {
@@ -59,8 +61,16 @@ class ProductAdd extends Component{
         .catch(err => alert('not saved :/')) // parses JSON response into native Javascript objects 
     }
 
+    async componentDidMount(){
+        //fecth from apis
+        const stores = await getStores();
+        const categories = await getCategories();
+
+        this.setState({categories, stores});
+    }
+
         render(){
-            const {product_name, product_category, product_price, product_store} = this.state;
+            const {product_name, product_category, product_price, product_store, categories, stores} = this.state;
             return(
             <article className="br3 ba dark-gray b--black-10 mv4 w-100 w-50-m w-25-l mw6 shadow-5 center">
                 <main className="pa4 black-80">
@@ -77,11 +87,21 @@ class ProductAdd extends Component{
                             </div>
                             <div className="mv3">
                                 <label className="db fw6 lh-copy f6" htmlFor="">Store</label>
-                                <input className="b pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100" required value={product_store} onChange={this.handleStoreChange} type="text" name="" id="password" />
-                            </div>
+                                <select className="b pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100" value={product_store} onChange={this.handleStoreChange} type="text" name="" id="password">
+                                    <option>- Select -</option>
+                                    {
+                                        stores && stores.map(store => <option key={store.id}>{store.store_name}</option>)
+                                    }
+                                </select>                            
+                                </div>
                             <div className="mv3">
-                                <label className="db fw6 lh-copy f6" htmlFor="">Category(optional)</label>
-                                <input className="b pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100" value={product_category} onChange={this.handleCategoryChange} type="text" name="" id="password" />
+                                <label className="db fw6 lh-copy f6" htmlFor="">Category</label>
+                                <select className="b pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100" value={product_category} onChange={this.handleCategoryChange} type="text" name="" id="password">
+                                    <option>- Select -</option>
+                                    {
+                                        categories && categories.map(category => <option key={category.id}>{category.category_name}</option>)
+                                    }
+                                </select>
                             </div>
                         </fieldset>
                         <div>

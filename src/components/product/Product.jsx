@@ -13,17 +13,17 @@ class Product extends React.Component{
             this.setState({newPrice: event.target.value});
         }
         handleDecrementCartItem = () =>{
-            this.props.decrementCartItem(this.state.product.product_id)
+            this.props.decrementCartItem(this.state.product.id)
         }
         handleIncrementCartItem = () =>{
-            this.props.incrementCartItem(this.state.product.product_id)
+            this.props.incrementCartItem(this.state.product.id)
         }
         handleEdit = () => {
-            this.props.edit(this.props.product.product_id, this.state.newPrice);
+            this.props.edit(this.props.product.id, this.state.newPrice);
             this.setState({isEdit: false})
         }
         handleDelete = () => {
-            this.props.delete(this.props.product.product_id);
+            this.props.delete(this.props.product.id);
         }
     render(){
         const {product} = this.props;
@@ -41,8 +41,8 @@ class Product extends React.Component{
                         :
                         <td>{product.price}</td>
                 }
-                <td>{product.store}</td>
-                <td>{product.category}</td>
+                <td>{product.store_name}</td>
+                <td>{product.category_name}</td>
                 <td>
                     <button onClick={this.handleIncrementCartItem}>+</button>
                     <button onClick={this.handleDecrementCartItem}>-</button>
