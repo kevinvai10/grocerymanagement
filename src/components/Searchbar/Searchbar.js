@@ -20,7 +20,7 @@ class Searchbar extends Component{
         return(
             <div>
                 <input
-                    className="searchbar-input"
+                    className="pa2 input-reset ba bg-transparent hover-bg-black hover-white w-15"
                     value={search}
                     placeholder={placeHolder}
                     name="search"  

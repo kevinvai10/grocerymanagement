@@ -4,6 +4,7 @@ import ProductAdd from './components/ProductAdd/ProductAdd';
 import Nav from './components/nav/Nav';
 import './App.css';
 import ProductList from './components/ProductList/ProductList';
+import 'tachyons';
 
 function App() {
   return (

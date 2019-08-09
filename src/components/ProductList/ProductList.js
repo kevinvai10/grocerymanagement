@@ -3,7 +3,6 @@ import Product from '../product/Product';
 import SearchBar from '../Searchbar/Searchbar';
 import {getProducts, editProductPrice, deleteProduct} from '../../utils/apicalls';
 import '../ProductList/ProductList.css';
-
 class ProductList extends React.Component{
     constructor(){
         super();
@@ -120,12 +119,7 @@ class ProductList extends React.Component{
     }
 
     componentDidMount(){
-        getProducts().then(products => {
-            console.log('current products:' , products);
-            this.setState({
-                products: products
-            })
-        })
+        getProducts().then(products => this.setState({products: products}))
     }
     render(){
         const {products} = this.state;

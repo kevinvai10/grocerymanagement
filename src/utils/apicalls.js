@@ -1,35 +1,43 @@
 import {getProductsUrl, addProductUrl, editProductUrl, deleteProductUrl,getStoresUrl, getCategoriesUrl} from './routes';
-//returns array of products
+//--------------------------------------------------
+                    //GET REQUESTS
+//--------------------------------------------------
 const getProducts = () => fetch(getProductsUrl).then(response => response.json());
 const getCategories = () => fetch(getCategoriesUrl).then(response => response.json());
 const getStores = () => fetch(getStoresUrl).then(response => response.json());
-//adds product to db
+//--------------------------------------------------
+                    //POST REQUESTS
+//--------------------------------------------------
 const addProduct = (data) => {
     return fetch(addProductUrl , {
-        method: 'POST', // *GET, POST, PUT, DELETE, etc.
+        method: 'POST', 
         headers: {
             'Content-Type': 'application/json',
         },
-        body: JSON.stringify(data), // body data type must match "Content-Type" header
+        body: JSON.stringify(data),
     })
     .then(response => response.json())
 } 
-
+//--------------------------------------------------
+                    //PUT REQUESTS
+//--------------------------------------------------
 const editProductPrice = (data) => {
     return fetch(editProductUrl , {
-        method: 'PUT', // *GET, POST, PUT, DELETE, etc.
+        method: 'PUT', 
         headers: {
             'Content-Type': 'application/json',
             'Id': data.id
         },
-        body: JSON.stringify(data), // body data type must match "Content-Type" header
-    })
+        body: JSON.stringify(data),
+        })
     .then(response => response.json())
 } 
-
+//--------------------------------------------------
+                    //DELETE REQUESTS
+//--------------------------------------------------
 const deleteProduct = (id) => {
     return fetch(deleteProductUrl , {
-        method: 'DELETE', // *GET, POST, PUT, DELETE, etc.
+        method: 'DELETE', 
         headers: {
             'Content-Type': 'application/json',
             'Id': id

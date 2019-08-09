@@ -1,3 +1,26 @@
-.nav-container:last-child{
+.nav-container{
+    display:flex;
+    justify-content: center;
+}
+.nav-container-item{
+    text-align: center;
+    padding: 15px;
     margin-left: 25px;
+    border: 1px solid silver;
+    transition: 0.2s ease;
+    color: #696767;
+}
+
+.nav-container-item:hover{
+    background-color:silver;
+    opacity: 0.75;
+}
+
+.nav-container-item-selected{
+    text-align: center;
+    padding: 15px;
+    margin-left: 25px;
+    background-color: silver;
+    border: 1px solid silver;
+    color: black;
 }
