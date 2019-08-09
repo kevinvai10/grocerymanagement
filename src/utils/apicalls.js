@@ -1,6 +1,4 @@
-const getProductsUrl = "http://localhost:3002/products/";
-const addProductUrl = "http://localhost:3002/addproduct";
-const editProductUrl = "http://localhost:3002/edit";
+import {getProductsUrl, addProductUrl, editProductUrl, deleteProductUrl} from './routes';
 //returns array of products
 const getProducts = () => fetch(getProductsUrl).then(response => response.json());
 
@@ -28,8 +26,20 @@ const editProductPrice = (data) => {
     .then(response => response.json())
 } 
 
+const deleteProduct = (id) => {
+    return fetch(deleteProductUrl , {
+        method: 'DELETE', // *GET, POST, PUT, DELETE, etc.
+        headers: {
+            'Content-Type': 'application/json',
+            'Id': id
+        },
+    })
+    .then(response => response.json())
+}
+
 export {
     getProducts,
     addProduct,
     editProductPrice,
+    deleteProduct
 }
