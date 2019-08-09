@@ -1,5 +1,5 @@
 import React from 'react'
-
+import './Product.style.css'
 class Product extends React.Component{
     constructor(props){
         super(props);
@@ -13,18 +13,19 @@ class Product extends React.Component{
             this.setState({newPrice: event.target.value});
         }
         handleDecrementCartItem = () =>{
-            this.props.decrementCartItem(this.state.product.product_id)
+            this.props.decrementCartItem(this.props.product.id)
         }
         handleIncrementCartItem = () =>{
-            this.props.incrementCartItem(this.state.product.product_id)
+            this.props.incrementCartItem(this.props.product.id)
         }
         handleEdit = () => {
-            this.props.edit(this.props.product.product_id, this.state.newPrice);
+            this.props.edit(this.props.product.id, this.props.newPrice);
             this.setState({isEdit: false})
         }
         handleDelete = () => {
-            this.props.delete(this.props.product.product_id);
+            this.props.delete(this.props.product.id);
         }
+
     render(){
         const {product} = this.props;
         const {isEdit, newPrice} = this.state
@@ -33,26 +34,28 @@ class Product extends React.Component{
                 <td>{product.name}</td>
                 {
                     isEdit ? 
-                    <input 
-                        onChange={this.handleChange} 
-                        placeholder={product.price} 
-                        value={newPrice}
-                        />
+                    <td>
+                        <input 
+                            onChange={this.handleChange} 
+                            placeholder={product.price} 
+                            value={newPrice}
+                            />
+                    </td>
                         :
                         <td>{product.price}</td>
                 }
-                <td>{product.store}</td>
-                <td>{product.category}</td>
+                <td>{product.store_name}</td>
+                <td>{product.category_name}</td>
                 <td>
-                    <button onClick={this.handleIncrementCartItem}>+</button>
-                    <button onClick={this.handleDecrementCartItem}>-</button>
+                    <button className="product-button" onClick={this.handleIncrementCartItem}>+</button>
+                    <button className="product-button" onClick={this.handleDecrementCartItem}>-</button>
                     {
                         this.state.isEdit ? 
-                        <button onClick={this.handleEdit}>Save</button>
+                        <button className="product-button" onClick={this.handleEdit}>Save</button>
                         :
-                        <button onClick={() => this.setState({isEdit: true})}>Edit price</button>
+                        <button className="product-button" onClick={() => this.setState({isEdit: true})}>Edit price</button>
                     }
-                    <button onClick={this.handleDelete}>x</button>
+                    <button className="product-button" onClick={this.handleDelete}>x</button>
                 </td>
             </tr>
         )

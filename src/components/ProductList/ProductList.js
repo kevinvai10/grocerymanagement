@@ -3,7 +3,6 @@ import Product from '../product/Product';
 import SearchBar from '../Searchbar/Searchbar';
 import {getProducts, editProductPrice, deleteProduct} from '../../utils/apicalls';
 import '../ProductList/ProductList.css';
-
 class ProductList extends React.Component{
     constructor(){
         super();
@@ -32,21 +31,21 @@ class ProductList extends React.Component{
         const {cart, products} = this.state;
         let productExists = false;
             for(let product of cart){
-                if(product.product_id === id) productExists = true;
+                if(product.id === id) productExists = true;
             }
             //update existing element if exists
             if(productExists){
-                const newCart = this.state.cart.map(item => {
-                    if(item.product_id === id){
-                        return {...item, amount: item.amount + 1}
+                const newCart = this.state.cart.map(product => {
+                    if(product.id === id){
+                        return {...product, amount: product.amount + 1}
                     } 
-                    return item;
+                    return product;
                 })
                 this.setState({cart: newCart}, () => {
                     this.addToCart(id);
                 });
             } else{
-                            const foundItem = products.find(product => product.product_id === id);
+                            const foundItem = products.find(product => product.id === id);
                             const newItem = {...foundItem, amount: 1}
                             this.setState((prevState) => ({cart: [...prevState.cart, newItem]}), () => {
                                 this.addToCart(id);
@@ -56,11 +55,11 @@ class ProductList extends React.Component{
 
     decrementCartItem(id){
         if(this.state.cart.length > 0){
-            const newCart = this.state.cart.map(item => {
-                if(item.product_id === id){
-                    return item.amount > 0 ? {...item, amount: item.amount - 1} : item;
+            const newCart = this.state.cart.map(product => {
+                if(product.id === id){
+                    return product.amount > 0 ? {...product, amount: product.amount - 1} : product;
                 } 
-                return item;
+                return product;
             })
             this.setState({cart: newCart}, () => {
                 this.addToCart(id);
@@ -70,7 +69,7 @@ class ProductList extends React.Component{
     addToCart(id){
         //const newCart = this.countCartItemAmount(id);
         const newProducts = this.state.products.map(product => {
-            if(product.product_id === id){
+            if(product.id === id){
                 return product.isAddedToCart ? {...product, isAddedToCart: false} : {...product, isAddedToCart: true};
             }
             return product;
@@ -82,7 +81,7 @@ class ProductList extends React.Component{
 
     removeFromCart(id){
         const newProducts = this.state.products.map(product => {
-            if(product.product_id === id){
+            if(product.id === id){
                 return product.isAddedToCart ? {...product, isAddedToCart: false} : {...product, isAddedToCart: true};
             }
             return product;
@@ -120,11 +119,7 @@ class ProductList extends React.Component{
     }
 
     componentDidMount(){
-        getProducts().then(products => {
-            this.setState({
-                products: products
-            })
-        })
+        getProducts().then(products => this.setState({products: products}))
     }
     render(){
         const {products} = this.state;
@@ -154,7 +149,7 @@ class ProductList extends React.Component{
                                     {
                                         products && filteredProducts.map(product => (
                                             <Product 
-                                                key={product.product_id} 
+                                                key={product.id} 
                                                 product={product} 
                                                 decrementCartItem={this.decrementCartItem} 
                                                 incrementCartItem={this.incrementCartItem} 

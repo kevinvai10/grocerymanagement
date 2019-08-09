@@ -8,6 +8,7 @@ table {
     margin-left: auto;
     margin-right: auto;
     border-collapse: collapse;
+    border-bottom: 25px;
   }
   
   th {
@@ -23,6 +24,6 @@ table {
     text-align: left;
 }
 
-tr:hover {background-color: rgb(233, 229, 220);}
+tr:hover {background-color: black; color: white;}
 
 
