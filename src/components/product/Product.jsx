@@ -13,13 +13,13 @@ class Product extends React.Component{
             this.setState({newPrice: event.target.value});
         }
         handleDecrementCartItem = () =>{
-            this.props.decrementCartItem(this.state.product.id)
+            this.props.decrementCartItem(this.props.product.id)
         }
         handleIncrementCartItem = () =>{
-            this.props.incrementCartItem(this.state.product.id)
+            this.props.incrementCartItem(this.props.product.id)
         }
         handleEdit = () => {
-            this.props.edit(this.props.product.id, this.state.newPrice);
+            this.props.edit(this.props.product.id, this.props.newPrice);
             this.setState({isEdit: false})
         }
         handleDelete = () => {
