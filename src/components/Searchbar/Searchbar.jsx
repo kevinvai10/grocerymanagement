@@ -11,7 +11,7 @@ class Searchbar extends Component{
     //filter array
     onChangeInput(event){
         this.setState({value: event.target.value}, () => {
-            this.props.searchChange(this.state.value);
+            this.props.onChange(this.state.value);
         });
     }
 

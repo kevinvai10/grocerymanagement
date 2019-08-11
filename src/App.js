@@ -1,16 +1,15 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
-import ProductAdd from './components/ProductAdd/ProductAdd';
+import { BrowserRouter as Router, Route,} from 'react-router-dom';
+import ProductList from './components/ProductList/ProductList.jsx'
+import ProductAdd from './components/ProductAdd/ProductAdd.jsx'
 import Nav from './components/nav/Nav';
 import './App.css';
-import ProductList from './components/ProductList/ProductList';
 import 'tachyons';
 
 function App() {
   return (
     <div className="App">
       <header>
-        <h1>Shopping cart</h1>
       </header>
       <Router>
         <Nav />

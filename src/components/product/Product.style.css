@@ -1,9 +1,9 @@
 .product-button{
-    background-color: whitesmoke;
-    opacity: 0.60;
+    background-color: transparent;
     transition: 0.1s ease;
+    margin-left: 10px;
+    font-weight: bold;
 }
 
 .product-button:hover{
-    opacity: 1;
 }

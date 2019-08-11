@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 import {addProduct, getStores, getCategories} from '../../utils/apicalls';
+
 class ProductAdd extends Component{
     constructor(){
         super();

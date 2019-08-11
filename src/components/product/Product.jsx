@@ -1,5 +1,6 @@
 import React from 'react'
 import './Product.style.css'
+import Searchbar from '../Searchbar/Searchbar';
 class Product extends React.Component{
     constructor(props){
         super(props);
@@ -9,8 +10,8 @@ class Product extends React.Component{
         }
     }
     
-        handleChange = (event) => {
-            this.setState({newPrice: event.target.value});
+        handleChange = (price) => {
+            this.setState({newPrice: price});
         }
         handleDecrementCartItem = () =>{
             this.props.decrementCartItem(this.props.product.id)
@@ -19,7 +20,7 @@ class Product extends React.Component{
             this.props.incrementCartItem(this.props.product.id)
         }
         handleEdit = () => {
-            this.props.edit(this.props.product.id, this.props.newPrice);
+            this.props.edit(this.props.product.id, this.state.newPrice);
             this.setState({isEdit: false})
         }
         handleDelete = () => {
@@ -35,14 +36,14 @@ class Product extends React.Component{
                 {
                     isEdit ? 
                     <td>
-                        <input 
+                        <Searchbar 
                             onChange={this.handleChange} 
-                            placeholder={product.price} 
+                            placeHolder={product.price} 
                             value={newPrice}
                             />
                     </td>
                         :
-                        <td>{product.price}</td>
+                        <td>{`$${product.price}`}</td>
                 }
                 <td>{product.store_name}</td>
                 <td>{product.category_name}</td>

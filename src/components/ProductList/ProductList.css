@@ -1,4 +1,14 @@
+.cart h1, img{
+  display: inline-block;
+  margin-top: 25px;
+}
 
+.cart img{
+  cursor: pointer;
+  height: 30px;
+  width: 30px;
+  margin-right:10px;
+}
 table {
     width: 70%;
     max-height: 200px;
@@ -24,6 +34,18 @@ table {
     text-align: left;
 }
 
-tr:hover {background-color: black; color: white;}
+tr:hover {
+  background-color: silver; 
+  color: white;
+  border: 1px solid white;
+}
+
+tr:hover button {
+  color: white;
+}
+
+button:hover{
+  cursor: pointer;
+}
 
 

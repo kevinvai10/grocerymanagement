@@ -104,13 +104,20 @@ class ProductList extends React.Component{
     }
 
     delete(id){
+        const {products} = this.state;
         //Call api
-        deleteProduct(id).then(res => {
+        /*deleteProduct(id).then(res => {
             getProducts().then(products => {
                 this.setState({
                     products: products
                 })
             })
+        })*/
+        deleteProduct(id).then(response => {
+            //filter through current state
+            const deletedProduct = response[0];
+            const newProducts = products.filter(product => product.id !== deletedProduct.id);
+            this.setState({products: newProducts});
         })
     }
 
@@ -121,17 +128,22 @@ class ProductList extends React.Component{
     componentDidMount(){
         getProducts().then(products => this.setState({products: products}))
     }
+    
     render(){
-        const {products} = this.state;
+        const {products,search,cartTotal} = this.state;
         const filteredProducts = products.filter(product => product.name.toLowerCase().includes(this.state.search.toLowerCase()))
+        const imgSrc = "https://icon-library.net/images/cart-icon-png-white/cart-icon-png-white-4.jpg"
         return(
             <div className="">
                 <div>
-                    <h1>{`Total:$${this.state.cartTotal}`}</h1>
+                    <div className="cart">
+                        <img src={imgSrc} alt="cart"/>
+                        <h1>{`Total:$${cartTotal}`}</h1>
+                    </div>
                     <SearchBar 
-                    searchChange={this.searchChange}
-                    value={this.state.search}
-                    placeHolder={"Search by name"}
+                        onChange={this.searchChange}
+                        value={search}
+                        placeHolder={"Search by name"}
                     />
                 </div>
                 <div className="flex-container scroll-table">
