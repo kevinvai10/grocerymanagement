@@ -35,7 +35,7 @@ class ProductList extends React.Component{
             }
             //update existing element if exists
             if(productExists){
-                const newCart = this.state.cart.map(product => {
+                const newCart = cart.map(product => {
                     if(product.id === id){
                         return {...product, amount: product.amount + 1}
                     } 
