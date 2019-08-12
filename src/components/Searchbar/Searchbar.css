@@ -14,8 +14,8 @@
 }
 
 ::-webkit-scrollbar {
-    width: 0px;
-    background: transparent; /* make scrollbar transparent */
+    width: 10px;
+    /*background: transparent; /* make scrollbar transparent */
 }
 
 .searchbar-button:hover{
