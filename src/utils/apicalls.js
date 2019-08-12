@@ -1,4 +1,4 @@
-import {getProductsUrl, addProductUrl, editProductUrl, deleteProductUrl,getStoresUrl, getCategoriesUrl,getRecipeByIngredientUrl, getRandomFoodTriviaUrl} from './routes';
+import {getProductsUrl, addProductUrl, editProductUrl, deleteProductUrl,getStoresUrl, getCategoriesUrl,getRecipeByIngredientUrl, getRandomFoodTriviaUrl, addCategoryUrl, addStoreUrl} from './routes';
 //--------------------------------------------------
                     //GET REQUESTS
 //--------------------------------------------------
@@ -12,6 +12,28 @@ const getRandomTrivia = () => fetch(getRandomFoodTriviaUrl).then(response => res
 //--------------------------------------------------
 const addProduct = (data) => {
     return fetch(addProductUrl , {
+        method: 'POST', 
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+    })
+    .then(response => response.json())
+} 
+
+const addCategory = (data) => {
+    return fetch(addCategoryUrl , {
+        method: 'POST', 
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+    })
+    .then(response => response.json())
+} 
+
+const addStore = (data) => {
+    return fetch(addStoreUrl , {
         method: 'POST', 
         headers: {
             'Content-Type': 'application/json',
@@ -55,6 +77,8 @@ export {
     getRecipes,
     getRandomTrivia,
     addProduct,
+    addStore,
+    addCategory,
     editProductPrice,
     deleteProduct
 }
