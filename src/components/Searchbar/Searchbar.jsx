@@ -17,7 +17,6 @@ class Searchbar extends Component{
 
     render(){
         const {value, placeHolder} = this.props;
-        console.log('search: ', value)
         return(
             <div>
                 <input
