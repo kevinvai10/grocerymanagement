@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import {Link} from 'react-router-dom';
 import {addProduct, getStores, getCategories} from '../../utils/apicalls';
 
 class ProductAdd extends Component{
@@ -40,12 +39,14 @@ class ProductAdd extends Component{
 
     handleSubmit(event){
         event.preventDefault();
-
+        const {product_name, product_price, product_storeid,product_categoryid, product_store, product_category}= this.state
+        if(product_store === '--Select--' || !product_store) return alert('Select Category Please');
+        if(product_category === '--Select--' || !product_category) return alert('Select Store Please');
         const newProduct = {
-                name: this.state.product_name,
-                price: this.state.product_price,
-                store: this.state.product_storeid,
-                category: this.state.product_categoryid,
+                name: product_name,
+                price: product_price,
+                store: product_storeid,
+                category: product_categoryid,
         }
 
         addProduct(newProduct).then(response => {
@@ -82,11 +83,11 @@ class ProductAdd extends Component{
                             </div>
                             <div className="mv3">
                                 <label className="db fw6 lh-copy f6" htmlFor="">Price of the product</label>
-                                <input className="b pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100" required value={product_price} onChange={this.handlePriceChange} type="text" name="" id="password" />
+                                <input className="b pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100" type="number" required value={product_price} onChange={this.handlePriceChange} type="text" name="" id="password" />
                             </div>
                             <div className="mv3">
                                 <label className="db fw6 lh-copy f6" htmlFor="">Category</label>
-                                <select className="b pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100" value={product_category} onChange={this.handleCategoryChange} type="text" name="" id="password">
+                                <select className="b pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100" required value={product_category} onChange={this.handleCategoryChange} type="text" name="" id="password">
                                     <option>- Select -</option>
                                     {
                                         categories && categories.map(category => <option key={category.id}>{category.category_name}</option>)
@@ -95,7 +96,7 @@ class ProductAdd extends Component{
                             </div>
                             <div className="mv3">
                                 <label className="db fw6 lh-copy f6" htmlFor="">Store</label>
-                                <select className="b pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100" value={product_store} onChange={this.handleStoreChange} type="text" name="" id="password">
+                                <select className="b pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100" required value={product_store} onChange={this.handleStoreChange} type="text" name="" id="password">
                                     <option>- Select -</option>
                                     {
                                         stores && stores.map(store => <option key={store.id}>{store.store_name}</option>)
@@ -108,9 +109,6 @@ class ProductAdd extends Component{
                             className="b ph3 pv2 input-reset ba b--black bg-transparent grow pointer f6 dib" 
                             type="submit" 
                             value="Add" />
-                        </div>
-                        <div className="lh-copy mt3">
-                        <Link to="/" className="f6 link dim black db pointer">Main page</Link>
                         </div>
                     </form>
                 </main>

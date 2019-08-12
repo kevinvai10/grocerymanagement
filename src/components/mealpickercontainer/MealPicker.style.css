@@ -1,0 +1,20 @@
+.mealpicker-container{
+    background-size: 100% 150%;
+    margin-top: 35px;
+}
+.mealpicker-options{
+    display:flex;
+    justify-content: center;
+}
+
+.meal-container{
+    width: 85vw;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(395px, 1fr));
+    grid-gap: 20px;
+    justify-items: center;
+    align-items: center;
+    margin-top: 18px;
+}
+

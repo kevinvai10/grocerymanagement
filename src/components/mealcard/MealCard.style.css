@@ -1,0 +1,16 @@
+/* Make img responsive */
+.mealcard-container{
+    width: 400px;
+    height: 400px;
+    box-shadow: 3px 3px 8px 2px lightgray;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+.mealcard-container img{
+    width: 350px;
+    height: 350px;
+    margin-top: 25px;
+}

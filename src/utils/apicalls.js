@@ -1,10 +1,12 @@
-import {getProductsUrl, addProductUrl, editProductUrl, deleteProductUrl,getStoresUrl, getCategoriesUrl} from './routes';
+import {getProductsUrl, addProductUrl, editProductUrl, deleteProductUrl,getStoresUrl, getCategoriesUrl,getRecipeByIngredientUrl, getRandomFoodTriviaUrl} from './routes';
 //--------------------------------------------------
                     //GET REQUESTS
 //--------------------------------------------------
 const getProducts = () => fetch(getProductsUrl).then(response => response.json());
 const getCategories = () => fetch(getCategoriesUrl).then(response => response.json());
 const getStores = () => fetch(getStoresUrl).then(response => response.json());
+const getRecipes = (ingredients) => fetch(getRecipeByIngredientUrl + ingredients).then(response => response.json());
+const getRandomTrivia = () => fetch(getRandomFoodTriviaUrl).then(response => response.json());
 //--------------------------------------------------
                     //POST REQUESTS
 //--------------------------------------------------
@@ -50,6 +52,8 @@ export {
     getProducts,
     getCategories,
     getStores,
+    getRecipes,
+    getRandomTrivia,
     addProduct,
     editProductPrice,
     deleteProduct

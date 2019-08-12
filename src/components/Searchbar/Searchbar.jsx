@@ -16,12 +16,13 @@ class Searchbar extends Component{
     }
 
     render(){
-        const {search, placeHolder} = this.props;
+        const {value, placeHolder} = this.props;
+        console.log('search: ', value)
         return(
             <div>
                 <input
                     className="pa2 input-reset ba bg-transparent hover-bg-black hover-white w-15"
-                    value={search}
+                    value={value}
                     placeholder={placeHolder}
                     name="search"  
                     onChange={this.onChangeInput}           

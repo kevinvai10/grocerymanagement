@@ -9,6 +9,14 @@
   width: 30px;
   margin-right:10px;
 }
+.cart-options{
+  display:flex;
+  justify-content: center;
+}
+
+.cart-options button{
+  margin-left: 15px;
+}
 table {
     width: 70%;
     max-height: 200px;
@@ -47,5 +55,6 @@ tr:hover button {
 button:hover{
   cursor: pointer;
 }
+
 
 

@@ -32,7 +32,8 @@ class Product extends React.Component{
         const {isEdit, newPrice} = this.state
         return (
             <tr>
-                <td>{product.name}</td>
+                <td>{product.name
+                }</td>
                 {
                     isEdit ? 
                     <td>
@@ -45,6 +46,7 @@ class Product extends React.Component{
                         :
                         <td>{`$${product.price}`}</td>
                 }
+                <td>{product.amount || 0}</td>
                 <td>{product.store_name}</td>
                 <td>{product.category_name}</td>
                 <td>

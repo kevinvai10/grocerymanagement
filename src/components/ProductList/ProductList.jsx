@@ -11,9 +11,11 @@ class ProductList extends React.Component{
             products: [],
             cart: [],
             cartTotal: 0,
+            isShowCart: false,
         }
-        this.addToCart = this.addToCart.bind(this);
+
         this.calculateCartTotal = this.calculateCartTotal.bind(this);
+        this.showCartItemsOnly = this.showCartItemsOnly.bind(this);
         this.searchChange = this.searchChange.bind(this);
         this.incrementCartItem = this.incrementCartItem.bind(this);
         this.decrementCartItem = this.decrementCartItem.bind(this);
@@ -22,84 +24,60 @@ class ProductList extends React.Component{
     }
 
     calculateCartTotal(){
-        const total = this.state.cart.reduce((acc, currval) => acc + currval.price * currval.amount, 0);
+        const {cart} = this.state;
+        const total = cart.reduce((acc, currval) => acc + currval.price * currval.amount, 0);
         return total;
+    }
+
+    showCartItemsOnly(){
+        const {products,isShowCart} = this.state;
+        if(isShowCart) return this.setState({isShowCart: false});
+        const newCart = products.filter(product => product.isAddedToCart);
+        this.setState({cart: newCart, isShowCart: true})
     }
 
     incrementCartItem(id){
         //find element in cart collection if it exists, else add it
-        const {cart, products} = this.state;
-        let productExists = false;
-            for(let product of cart){
-                if(product.id === id) productExists = true;
-            }
-            //update existing element if exists
-            if(productExists){
-                const newCart = cart.map(product => {
+        const {products} = this.state;
+                const newProducts = products.map(product => {
                     if(product.id === id){
-                        return {...product, amount: product.amount + 1}
+                        if(product.isAddedToCart)
+                            return {...product, amount: (product.amount || 0) + 1}
+                        else    
+                            return {...product, amount: (product.amount || 0) + 1, isAddedToCart: true}
                     } 
                     return product;
                 })
-                this.setState({cart: newCart}, () => {
-                    this.addToCart(id);
+                //save cart items
+                const newCart = newProducts.filter(product => product.isAddedToCart);
+
+                this.setState({products: newProducts, cart: newCart}, () => {
+                    this.setState({cartTotal: this.calculateCartTotal()});
                 });
-            } else{
-                            const foundItem = products.find(product => product.id === id);
-                            const newItem = {...foundItem, amount: 1}
-                            this.setState((prevState) => ({cart: [...prevState.cart, newItem]}), () => {
-                                this.addToCart(id);
-                            })
-            }
     }
 
     decrementCartItem(id){
-        if(this.state.cart.length > 0){
-            const newCart = this.state.cart.map(product => {
+            const newProducts = this.state.products.map(product => {
                 if(product.id === id){
-                    return product.amount > 0 ? {...product, amount: product.amount - 1} : product;
+                    return product.amount > 0 
+                    ? {...product, amount: product.amount - 1} 
+                    : {...product, isAddedToCart: false};
                 } 
                 return product;
             })
-            this.setState({cart: newCart}, () => {
-                this.addToCart(id);
-            });
-        } 
-    }
-    addToCart(id){
-        //const newCart = this.countCartItemAmount(id);
-        const newProducts = this.state.products.map(product => {
-            if(product.id === id){
-                return product.isAddedToCart ? {...product, isAddedToCart: false} : {...product, isAddedToCart: true};
-            }
-            return product;
-        })
-        this.setState({products: newProducts}, function(){
-            this.setState({cartTotal: this.calculateCartTotal()})
-        });
-    }
+            //update cart items
+            const newCart = newProducts.filter(product => product.isAddedToCart);
 
-    removeFromCart(id){
-        const newProducts = this.state.products.map(product => {
-            if(product.id === id){
-                return product.isAddedToCart ? {...product, isAddedToCart: false} : {...product, isAddedToCart: true};
-            }
-            return product;
-        })
-        this.setState({products: newProducts}, function(){
-            this.setState({cartTotal: this.calculateCartTotal()})
-        });
+            this.setState({products: newProducts, cart: newCart}, () => {
+                this.setState({cartTotal: this.calculateCartTotal()});
+            });
     }
 
     edit(id, newPrice){
         const data = {id, newPrice};
         editProductPrice(data).then(newproduct => {
             //edit new product in state instead of adding another call
-            getProducts().then(products => {
-                this.setState({
-                    products: products
-                })
-            })
+            getProducts().then(products => this.setState({products: products}))
         });
     }
 
@@ -121,6 +99,9 @@ class ProductList extends React.Component{
         })
     }
 
+    handleViewCart(){
+
+    }
     searchChange(value){
         this.setState({search: value})
     }
@@ -130,21 +111,26 @@ class ProductList extends React.Component{
     }
     
     render(){
-        const {products,search,cartTotal} = this.state;
-        const filteredProducts = products.filter(product => product.name.toLowerCase().includes(this.state.search.toLowerCase()))
         const imgSrc = "https://icon-library.net/images/cart-icon-png-white/cart-icon-png-white-4.jpg"
+        const {products,search,cartTotal, isShowCart, cart} = this.state;
+        const filteredProducts = isShowCart ? cart
+                                : products
+                                .filter(product => product.name.toLowerCase().includes(this.state.search.toLowerCase()))
         return(
             <div className="">
                 <div>
                     <div className="cart">
-                        <img src={imgSrc} alt="cart"/>
+                        <img src={imgSrc} onClick={this.showCartItemsOnly} alt="cart"/>
                         <h1>{`Total:$${cartTotal}`}</h1>
                     </div>
-                    <SearchBar 
-                        onChange={this.searchChange}
-                        value={search}
-                        placeHolder={"Search by name"}
-                    />
+                    <div className="cart-options">
+                        <SearchBar 
+                            onChange={this.searchChange}
+                            value={search}
+                            placeHolder={"Search by name"}
+                        />
+                        <button onClick={this.showCartItemsOnly}>{isShowCart ? 'View Products' : 'View Cart'}</button>
+                    </div>
                 </div>
                 <div className="flex-container scroll-table">
                 <table>
@@ -152,6 +138,7 @@ class ProductList extends React.Component{
                                     <tr>
                                         <th>Name</th>
                                         <th>Price</th>
+                                        <th>Amount</th>
                                         <th>Store</th>
                                         <th>Category</th>
                                         <th>Add/remove</th>
