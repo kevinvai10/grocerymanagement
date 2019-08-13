@@ -1,4 +1,17 @@
-import {getProductsUrl, addProductUrl, editProductUrl, deleteProductUrl,getStoresUrl, getCategoriesUrl,getRecipeByIngredientUrl, getRandomFoodTriviaUrl, addCategoryUrl, addStoreUrl} from './routes';
+import {
+    getProductsUrl, 
+    addProductUrl, 
+    editProductUrl, 
+    deleteProductUrl,
+    getStoresUrl, 
+    getCategoriesUrl,
+    getRecipeByIngredientUrl, 
+    getRandomFoodTriviaUrl,
+    addCategoryUrl, 
+    addStoreUrl, 
+    registerUrl,
+    signinUrl,
+} from './routes';
 //--------------------------------------------------
                     //GET REQUESTS
 //--------------------------------------------------
@@ -42,6 +55,28 @@ const addStore = (data) => {
     })
     .then(response => response.json())
 } 
+
+const register = (data) => {
+    return fetch(registerUrl , {
+        method: 'POST', 
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+    })
+    .then(response => response.json())
+}
+
+const signIn = (data) => {
+    return fetch(signinUrl , {
+        method: 'POST', 
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+    })
+    .then(response => response.json())
+}
 //--------------------------------------------------
                     //PUT REQUESTS
 //--------------------------------------------------
@@ -78,6 +113,8 @@ export {
     getRandomTrivia,
     addProduct,
     addStore,
+    register,
+    signIn,
     addCategory,
     editProductPrice,
     deleteProduct

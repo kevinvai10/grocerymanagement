@@ -79,15 +79,15 @@ class ProductAdd extends Component{
                             <legend className="f1 fw6 ph0 mh0">Add product</legend>
                             <div className="mt3">
                                 <label className="db fw6 lh-copy f6 required" htmlFor="">Name of the product</label>
-                                <input className="pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100" required value={product_name} onChange={this.handleNameChange} type="text" name="" id="" />
+                                <input className="pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100" required value={product_name} onChange={this.handleNameChange} type="text"/>
                             </div>
                             <div className="mv3">
                                 <label className="db fw6 lh-copy f6" htmlFor="">Price of the product</label>
-                                <input className="b pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100" type="number" required value={product_price} onChange={this.handlePriceChange} type="text" name="" id="password" />
+                                <input className="b pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100" required value={product_price} onChange={this.handlePriceChange} type="number"  />
                             </div>
                             <div className="mv3">
                                 <label className="db fw6 lh-copy f6" htmlFor="">Category</label>
-                                <select className="b pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100" required value={product_category} onChange={this.handleCategoryChange} type="text" name="" id="password">
+                                <select className="b pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100" required value={product_category} onChange={this.handleCategoryChange} type="text" >
                                     <option>- Select -</option>
                                     {
                                         categories && categories.map(category => <option key={category.id}>{category.category_name}</option>)
