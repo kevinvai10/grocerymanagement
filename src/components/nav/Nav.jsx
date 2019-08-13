@@ -3,7 +3,7 @@ import {connect} from 'react-redux'
 import {Link, withRouter} from 'react-router-dom'
 import './Nav.style.css'
 import { setLogin } from '../../redux/actions';
-
+//refactor
 const mapStateToProps = state => {
     return {
         isLoggedIn: state.loginStatus
