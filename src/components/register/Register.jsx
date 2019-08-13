@@ -1,5 +1,5 @@
 import React from 'react';
-import {withRouter} from 'react-router-dom';
+import {withRouter, Link} from 'react-router-dom';
 import {register} from '../../utils/apicalls';
 import 'tachyons';
 
@@ -84,6 +84,9 @@ onSubmitSignIn = (event) => {
                         type="submit"
                         value="Register"
                     />
+                    </div>
+                    <div className="lh-copy mt3">
+                    <Link to ="/signin" className="f6 link dim black db pointer">Already registered? Sign in here!</Link>
                     </div>
                 </div>
                 </main>

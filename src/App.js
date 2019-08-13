@@ -4,12 +4,12 @@ import ProductList from './components/ProductList/ProductList.jsx'
 import ProductAdd from './components/ProductAdd/ProductAdd.jsx'
 import MealPickerContainer from './components/mealpickercontainer/MealPickerContainer'
 import Nav from './components/nav/Nav';
-import './App.css';
-import 'tachyons';
 import AddCategory from './components/addcategory/AddCategory.jsx';
 import AddStore from './components/addstore/AddStore.jsx';
 import Register from './components/register/Register.jsx';
 import Signin from './components/signin/Signin.jsx';
+import './App.css';
+import 'tachyons';
 
 class App extends React.Component{
   constructor() {
@@ -23,13 +23,18 @@ class App extends React.Component{
     this.setState({isLoggedIn: true})
   }
 
+  signout = () => {
+    sessionStorage.setItem('loggedIn', false);
+    this.setState({isLoggedIn: false});
+  }
+
   render(){
       const {isLoggedIn} = this.state;
       return (
         <div className="App">
           <Router> 
             {
-              isLoggedIn && <Nav />
+              isLoggedIn && <Nav signout={this.signout}/>
             }
             <Route exact path="/" component={ProductList}/>
             <Route exact path="/add" component={ProductAdd}/>  
