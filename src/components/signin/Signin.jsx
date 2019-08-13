@@ -1,7 +1,20 @@
 import React from 'react';
-import {Link, withRouter} from 'react-router-dom';
+import {connect} from 'react-redux'
+import {Link} from 'react-router-dom';
 import {signIn} from '../../utils/apicalls';
+import { setLogin } from '../../redux/actions';
 
+const mapStateToProps = state => {
+    return {
+        isLoggedIn: state.loginStatus
+    }
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        signin: (value) => dispatch(setLogin(value)),
+    }
+}
 class Signin extends React.Component {
     constructor(props) {
         super(props);
@@ -28,8 +41,7 @@ class Signin extends React.Component {
         .then(user => {
         if (user.id) {
             sessionStorage.setItem('loggedIn', true);
-            this.props.login();
-            //this.props.history.push('/');
+            this.props.signin(true);
         }
     })
 }
@@ -81,4 +93,4 @@ class Signin extends React.Component {
 }
 }
 
-export default withRouter(Signin);
+export default connect(mapStateToProps, mapDispatchToProps)(Signin);

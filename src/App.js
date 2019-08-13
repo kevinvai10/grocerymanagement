@@ -1,4 +1,5 @@
 import React from 'react';
+import {connect} from 'react-redux'
 import { BrowserRouter as Router, Route, Redirect} from 'react-router-dom';
 import ProductList from './components/ProductList/ProductList.jsx'
 import ProductAdd from './components/ProductAdd/ProductAdd.jsx'
@@ -11,25 +12,27 @@ import Signin from './components/signin/Signin.jsx';
 import './App.css';
 import 'tachyons';
 
+const mapStateToProps = state => {
+  return {
+      isLoggedIn: state.loginStatus
+  }
+}
 class App extends React.Component{
-  constructor() {
-    super();
-    this.state = {
-      isLoggedIn: sessionStorage.getItem('loggedIn') || false,
+  constructor(props) {
+    super(props);
+    this.state = {
+      isLoggedIn: false,
     }
   }
 
-  signin = () => {
-    this.setState({isLoggedIn: true})
+  componentDidUpdate(prevState, prevProps){
+      if(prevState.isLoggedIn !== prevProps.isLoggedIn){
+        this.setState({isLoggedIn: prevProps.isLoggedIn})
+      }
   }
-
-  signout = () => {
-    sessionStorage.setItem('loggedIn', false);
-    this.setState({isLoggedIn: false});
-  }
-
+  
   render(){
-      const {isLoggedIn} = this.state;
+      const {isLoggedIn} = this.props;
       return (
         <div className="App">
           <Router> 
@@ -55,4 +58,4 @@ class App extends React.Component{
   }
 }
 
-export default App;
+export default connect(mapStateToProps)(App);

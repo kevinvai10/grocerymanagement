@@ -1,12 +1,25 @@
 import React from 'react'
+import {connect} from 'react-redux'
 import {Link, withRouter} from 'react-router-dom'
 import './Nav.style.css'
+import { setLogin } from '../../redux/actions';
+
+const mapStateToProps = state => {
+    return {
+        isLoggedIn: state.loginStatus
+    }
+}
+const mapDispatchToProps = (dispatch) => {
+    return {
+        signout: (value) => dispatch(setLogin(value)),
+    }
+}
 
 const Nav = (props) => {
     console.log(props.history.location.pathname);
     const handleSignout = () => {
         const {signout} = props;
-        signout();
+        signout(false);
     }
     return(
         <div className="nav-container">
@@ -18,4 +31,4 @@ const Nav = (props) => {
     )
 }
 
-export default withRouter(Nav);
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Nav));
