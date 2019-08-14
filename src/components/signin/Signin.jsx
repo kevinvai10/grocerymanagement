@@ -39,7 +39,6 @@ class Signin extends React.Component {
         }
         signIn(user)
         .then(user => {
-            console.log('our current id: ', user.id)
         if (user.id) {
             sessionStorage.setItem('user_id', user.id);
             this.props.signin(true);

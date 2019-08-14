@@ -16,7 +16,6 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 const Nav = (props) => {
-    console.log(props.history.location.pathname);
     const handleSignout = () => {
         const {signout} = props;
         sessionStorage.setItem('user_id', null);
