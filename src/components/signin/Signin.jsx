@@ -39,14 +39,15 @@ class Signin extends React.Component {
         }
         signIn(user)
         .then(user => {
+            console.log('our current id: ', user.id)
         if (user.id) {
+            sessionStorage.setItem('user_id', user.id);
             this.props.signin(true);
         }
     })
 }
 
     render() {
-
     return (
         <article className="br3 ba b--black-10 mv4 w-100 w-50-m w-25-l mw6 shadow-5 center">
             <main className="pa4 black-80">

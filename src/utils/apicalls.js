@@ -15,7 +15,12 @@ import {
 //--------------------------------------------------
                     //GET REQUESTS
 //--------------------------------------------------
-const getProducts = () => fetch(getProductsUrl).then(response => response.json());
+const getProducts = () => fetch(getProductsUrl,{headers: 
+    {
+        'Content-Type': 'application/json',
+        'user_id': sessionStorage.getItem('user_id')
+    }
+}).then(response => response.json());
 const getCategories = () => fetch(getCategoriesUrl).then(response => response.json());
 const getStores = () => fetch(getStoresUrl).then(response => response.json());
 const getRecipes = (ingredients) => fetch(getRecipeByIngredientUrl + ingredients).then(response => response.json());
@@ -28,6 +33,7 @@ const addProduct = (data) => {
         method: 'POST', 
         headers: {
             'Content-Type': 'application/json',
+            'user_id': sessionStorage.getItem('user_id')
         },
         body: JSON.stringify(data),
     })
@@ -39,6 +45,7 @@ const addCategory = (data) => {
         method: 'POST', 
         headers: {
             'Content-Type': 'application/json',
+            'user_id': sessionStorage.getItem('user_id')
         },
         body: JSON.stringify(data),
     })
@@ -50,6 +57,7 @@ const addStore = (data) => {
         method: 'POST', 
         headers: {
             'Content-Type': 'application/json',
+            'user_id': sessionStorage.getItem('user_id')
         },
         body: JSON.stringify(data),
     })
@@ -61,6 +69,7 @@ const register = (data) => {
         method: 'POST', 
         headers: {
             'Content-Type': 'application/json',
+            'user_id': sessionStorage.getItem('user_id')
         },
         body: JSON.stringify(data),
     })
@@ -85,7 +94,8 @@ const editProductPrice = (data) => {
         method: 'PUT', 
         headers: {
             'Content-Type': 'application/json',
-            'Id': data.id
+            'Id': data.id,
+            'user_id': sessionStorage.getItem('user_id')
         },
         body: JSON.stringify(data),
         })
@@ -99,7 +109,8 @@ const deleteProduct = (id) => {
         method: 'DELETE', 
         headers: {
             'Content-Type': 'application/json',
-            'Id': id
+            'Id': id,
+            'user_id': sessionStorage.getItem('user_id')
         },
     })
     .then(response => response.json())
