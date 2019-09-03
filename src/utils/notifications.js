@@ -68,10 +68,25 @@ const registerFailed = {
     }
 }
 
+const registerSuccess = {
+    title: "Welcome!",
+    message: "Your new account was succesfully registered!",
+    type: "success",
+    insert: "top",
+    container: "top-right",
+    animationIn: ["animated", "fadeIn"],
+    animationOut: ["animated", "fadeOut"],
+    dismiss: {
+        duration: 1000,
+        onScreen: true
+    }
+}
+
 export {
     addedProduct,
     addedProductFail,
     productUpdated,
     signInFailed,
-    registerFailed
+    registerFailed,
+    registerSuccess
 }

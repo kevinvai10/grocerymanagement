@@ -3,7 +3,7 @@ import {withRouter, Link} from 'react-router-dom';
 import {register} from '../../utils/apicalls';
 import LoadingCircle from '../loading/LoadingCircle';
 import { store } from 'react-notifications-component';
-import {registerFailed} from '../../utils/notifications'
+import {registerFailed, registerSuccess} from '../../utils/notifications'
 import 'tachyons';
 
 class Register extends React.Component {
@@ -39,6 +39,7 @@ onSubmitSignIn = (event) => {
     .then(user => {
         if (user) {
             this.setState({isLoading: false});
+            store.addNotification(registerSuccess);
             this.props.history.push("/signin");
         }
     }).catch(err => {
