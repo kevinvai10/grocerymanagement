@@ -4,20 +4,6 @@
     margin-left: 8px;
     margin-top: 10px;
 }
-
-.scroll-table{
-    height: 600px;
-    width: 100%;
-    overflow-y: scroll;
-    margin-bottom: 35px;
-    margin-top: 35px;
-}
-
-::-webkit-scrollbar {
-    width: 10px;
-    /*background: transparent; /* make scrollbar transparent */
-}
-
 .searchbar-button:hover{
     padding: 15px;
 }

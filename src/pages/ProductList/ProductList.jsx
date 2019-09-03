@@ -1,8 +1,8 @@
 import React from 'react';
-import Product from '../product/Product';
-import SearchBar from '../Searchbar/Searchbar';
+import Product from '../../components/product/Product';
+import SearchBar from '../../components/Searchbar/Searchbar';
 import {getProducts, editProductPrice, deleteProduct} from '../../utils/apicalls';
-import '../ProductList/ProductList.css';
+import './ProductList.css';
 class ProductList extends React.Component{
     constructor(){
         super();
@@ -99,9 +99,6 @@ class ProductList extends React.Component{
         })
     }
 
-    handleViewCart(){
-
-    }
     searchChange(value){
         this.setState({search: value})
     }
@@ -132,39 +129,36 @@ class ProductList extends React.Component{
                         <button onClick={this.showCartItemsOnly}>{isShowCart ? 'View Products' : 'View Cart'}</button>
                     </div>
                 </div>
-                <div className="flex-container scroll-table">
                 <table>
-                                <thead>
-                                    <tr>
-                                        <th>Name</th>
-                                        <th>Price</th>
-                                        <th>Amount</th>
-                                        <th>Store</th>
-                                        <th>Category</th>
-                                        <th>Add/remove</th>
-                                    </tr>
-                                </thead>
-                                <tbody className="scroll-table">
-                                    {
-                                        products && filteredProducts.map(product => (
-                                            <Product 
-                                                key={product.id} 
-                                                product={product} 
-                                                decrementCartItem={this.decrementCartItem} 
-                                                incrementCartItem={this.incrementCartItem} 
-                                                edit={this.edit}
-                                                delete={this.delete}
-                                                onClick={this.handleClick} 
-                                            />
-                                            )
-                                        )
-                                    }
-                                </tbody>
-                            </table>
-                </div>
-            </div>
-        )
-    }
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Price</th>
+                            <th>Amount</th>
+                            <th>Store</th>
+                            <th>Category</th>
+                            <th>Add/remove</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {
+                            products && filteredProducts.map(product => (
+                                <Product 
+                                key={product.id} 
+                                product={product} 
+                                decrementCartItem={this.decrementCartItem} 
+                                incrementCartItem={this.incrementCartItem} 
+                                edit={this.edit}
+                                delete={this.delete}
+                                onClick={this.handleClick} 
+                                />
+                                )
+                            )
+                        }
+                    </tbody>
+            </table>
+        </div>
+)}
 };
 
 export default ProductList

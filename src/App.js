@@ -1,9 +1,9 @@
 import React from 'react';
 import {connect} from 'react-redux'
 import { BrowserRouter as Router, Route, Redirect} from 'react-router-dom';
-import ProductList from './components/ProductList/ProductList.jsx'
-import ProductAdd from './components/ProductAdd/ProductAdd.jsx'
-import MealPickerContainer from './components/mealpickercontainer/MealPickerContainer'
+import ProductList from './pages/ProductList/ProductList'
+import ProductAdd from './pages/ProductAdd/ProductAdd'
+import MealPickerContainer from './pages/mealpickercontainer/MealPickerContainer'
 import Nav from './components/nav/Nav';
 import AddCategory from './components/addcategory/AddCategory.jsx';
 import AddStore from './components/addstore/AddStore.jsx';

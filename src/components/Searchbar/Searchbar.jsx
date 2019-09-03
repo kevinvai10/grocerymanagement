@@ -20,7 +20,7 @@ class Searchbar extends Component{
         return(
             <div>
                 <input
-                    className="pa2 input-reset ba bg-transparent hover-bg-black hover-white w-15"
+                    className={this.props.isEditPrice ? "pa2 input-reset ba bg-transparent hover-bg-black hover-white w3" : "pa2 input-reset ba bg-transparent hover-bg-black hover-white w-15"}
                     value={value}
                     placeholder={placeHolder}
                     name="search"  

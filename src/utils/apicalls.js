@@ -69,7 +69,7 @@ const register = (data) => {
         method: 'POST', 
         headers: {
             'Content-Type': 'application/json',
-            'user_id': sessionStorage.getItem('user_id')
+            //'user_id': sessionStorage.getItem('user_id')
         },
         body: JSON.stringify(data),
     })
