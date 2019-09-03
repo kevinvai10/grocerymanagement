@@ -2,6 +2,8 @@ import React from 'react';
 import Product from '../../components/product/Product';
 import SearchBar from '../../components/Searchbar/Searchbar';
 import {getProducts, editProductPrice, deleteProduct} from '../../utils/apicalls';
+import { store } from 'react-notifications-component';
+import {productUpdated} from '../../utils/notifications'
 import './ProductList.css';
 class ProductList extends React.Component{
     constructor(){
@@ -77,7 +79,10 @@ class ProductList extends React.Component{
         const data = {id, newPrice};
         editProductPrice(data).then(newproduct => {
             //edit new product in state instead of adding another call
-            getProducts().then(products => this.setState({products: products}))
+            getProducts().then(products => {
+                store.addNotification(productUpdated);
+                this.setState({products: products})
+            })
         });
     }
 

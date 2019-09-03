@@ -83,6 +83,6 @@ table {
   }
 
   tr:hover {
-    background-color: silver; 
+    background-color: rgb(233, 231, 231); 
     border: 1px solid white;
   }

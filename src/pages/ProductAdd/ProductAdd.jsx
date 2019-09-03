@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
 import {addProduct, getStores, getCategories} from '../../utils/apicalls';
+import {addedProduct, addedProductFail} from '../../utils/notifications'
+import { store } from 'react-notifications-component';
 //import "react-notifications-component/dist/theme.css";
 class ProductAdd extends Component{
     constructor(){
@@ -52,6 +54,7 @@ class ProductAdd extends Component{
 
         addProduct(newProduct).then(response => {
             debugger;
+            store.addNotification(addedProduct);
             //notificationSuccess('Added product').bind(this);            
             this.setState({
                 product_name: "",
@@ -62,8 +65,8 @@ class ProductAdd extends Component{
             })
         })
         .catch(err => {
-            alert('not saved')
             console.log('error ----->', err)
+            store.addNotification(addedProductFail);
         }) // parses JSON response into native Javascript objects 
     }
 

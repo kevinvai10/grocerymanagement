@@ -1,6 +1,7 @@
 import React from 'react'
 import './Product.style.css'
 import Searchbar from '../Searchbar/Searchbar';
+
 class Product extends React.Component{
     constructor(props){
         super(props);

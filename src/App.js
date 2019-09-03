@@ -9,6 +9,8 @@ import AddCategory from './components/addcategory/AddCategory.jsx';
 import AddStore from './components/addstore/AddStore.jsx';
 import Register from './components/register/Register.jsx';
 import Signin from './components/signin/Signin.jsx';
+import ReactNotification from 'react-notifications-component';
+import 'react-notifications-component/dist/theme.css'
 import './App.css';
 import 'tachyons';
 
@@ -35,6 +37,7 @@ class App extends React.Component{
       const {isLoggedIn} = this.props;
       return (
         <div className="App">
+          <ReactNotification />
           <Router> 
             {
               isLoggedIn && <Nav signout={this.signout}/>
