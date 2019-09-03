@@ -3,6 +3,9 @@ import {connect} from 'react-redux'
 import {Link} from 'react-router-dom';
 import {signIn} from '../../utils/apicalls';
 import { setLogin } from '../../redux/actions';
+import LoadingCircle from '../loading/LoadingCircle';
+import { store } from 'react-notifications-component';
+import {signInFailed} from '../../utils/notifications'
 
 const mapStateToProps = state => {
     return {
@@ -20,7 +23,8 @@ class Signin extends React.Component {
         super(props);
         this.state = {
             signInEmail: '',
-            signInPassword: ''
+            signInPassword: '',
+            isLoading: false,
         }
     }
 
@@ -41,14 +45,24 @@ class Signin extends React.Component {
         .then(user => {
         if (user.id) {
             sessionStorage.setItem('user_id', user.id);
+            this.setState({isLoading: false});
             this.props.signin(true);
         }
+    }).catch(err => {
+        console.log('error =>' , err)
+        store.addNotification(signInFailed);
+        this.setState({isLoading: false})
     })
+    this.setState({isLoading: true});
 }
 
     render() {
     return (
-        <article className="br3 ba b--black-10 mv4 w-100 w-50-m w-25-l mw6 shadow-5 center">
+        <>
+            {
+                this.state.isLoading && <LoadingCircle />
+            }
+        <article className={this.state.isLoading ?  "o-50 br3 ba b--black-10 mv4 w-100 w-50-m w-25-l mw6 shadow-5 center" : "br3 ba b--black-10 mv4 w-100 w-50-m w-25-l mw6 shadow-5 center"}>
             <main className="pa4 black-80">
                 <div className="measure">
                 <fieldset id="sign_up" className="ba b--transparent ph0 mh0">
@@ -88,6 +102,7 @@ class Signin extends React.Component {
             </div>
             </main>
         </article>
+        </>
     );
 }
 }

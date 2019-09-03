@@ -1,7 +1,7 @@
 import React from 'react'
-import Searchbar from '../Searchbar/Searchbar'
-import MealCard from '../mealcard/MealCard'
-import FactContainer from '../factcontainer/FactContainer'
+import Searchbar from '../../components/Searchbar/Searchbar'
+import MealCard from '../../components/mealcard/MealCard'
+import FactContainer from '../../components/factcontainer/FactContainer'
 import {getRecipes, getRandomTrivia} from '../../utils/apicalls';
 import './MealPicker.style.css'
 

@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import {addProduct, getStores, getCategories} from '../../utils/apicalls';
-
+import {addedProduct, addedProductFail} from '../../utils/notifications'
+import { store } from 'react-notifications-component';
+//import "react-notifications-component/dist/theme.css";
 class ProductAdd extends Component{
     constructor(){
         super();
@@ -16,6 +18,7 @@ class ProductAdd extends Component{
         this.handlePriceChange = this.handlePriceChange.bind(this);
         this.handleStoreChange = this.handleStoreChange.bind(this);
         this.handleCategoryChange = this.handleCategoryChange.bind(this);
+        this.notificationDOMRef = React.createRef();
     }
 
     handleNameChange(event) {
@@ -50,7 +53,9 @@ class ProductAdd extends Component{
         }
 
         addProduct(newProduct).then(response => {
-            alert("product added")
+            debugger;
+            store.addNotification(addedProduct);
+            //notificationSuccess('Added product').bind(this);            
             this.setState({
                 product_name: "",
                 product_price: "",
@@ -59,7 +64,10 @@ class ProductAdd extends Component{
                 amount: 0
             })
         })
-        .catch(err => alert('not saved :/')) // parses JSON response into native Javascript objects 
+        .catch(err => {
+            console.log('error ----->', err)
+            store.addNotification(addedProductFail);
+        }) // parses JSON response into native Javascript objects 
     }
 
     async componentDidMount(){
