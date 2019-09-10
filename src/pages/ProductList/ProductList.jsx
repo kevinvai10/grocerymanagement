@@ -3,7 +3,8 @@ import Product from '../../components/product/Product';
 import SearchBar from '../../components/Searchbar/Searchbar';
 import {getProducts, editProductPrice, deleteProduct} from '../../utils/apicalls';
 import { store } from 'react-notifications-component';
-import {productUpdated} from '../../utils/notifications'
+import {productUpdated} from '../../utils/notifications';
+import LoadingCircle from '../../components/loading/LoadingCircle';
 import './ProductList.css';
 class ProductList extends React.Component{
     constructor(){
@@ -14,6 +15,7 @@ class ProductList extends React.Component{
             cart: [],
             cartTotal: 0,
             isShowCart: false,
+            isLoading: true
         }
 
         this.calculateCartTotal = this.calculateCartTotal.bind(this);
@@ -109,19 +111,23 @@ class ProductList extends React.Component{
     }
 
     async componentDidMount(){
-        
         const products = await getProducts().then(products => products);
-        this.setState({products: products})
+        this.setState({products, isLoading: false})
     }
     
     render(){
         const imgSrc = "https://icon-library.net/images/cart-icon-png-white/cart-icon-png-white-4.jpg"
-        const {products,search,cartTotal, isShowCart, cart} = this.state;
+        const { products,
+                search,cartTotal, 
+                isShowCart, 
+                cart, 
+                isLoading
+            } = this.state;
         const filteredProducts = isShowCart ? cart
                                 : products
                                 .filter(product => product.name.toLowerCase().includes(this.state.search.toLowerCase()))
         return(
-            <div className="">
+            <div className="product-list">
                 <div>
                     <div className="cart">
                         <img src={imgSrc} onClick={this.showCartItemsOnly} alt="cart"/>
@@ -136,6 +142,9 @@ class ProductList extends React.Component{
                         <button onClick={this.showCartItemsOnly}>{isShowCart ? 'View Products' : 'View Cart'}</button>
                     </div>
                 </div>
+                {
+                    isLoading && <LoadingCircle />
+                }
                 <table>
                     <thead>
                         <tr>
