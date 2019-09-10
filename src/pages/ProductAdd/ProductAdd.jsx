@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {addProduct, getStores, getCategories} from '../../utils/apicalls';
 import {addedProduct, addedProductFail} from '../../utils/notifications'
 import { store } from 'react-notifications-component';
+import './ProductAdd.style.css';
 //import "react-notifications-component/dist/theme.css";
 class ProductAdd extends Component{
     constructor(){
