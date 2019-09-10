@@ -108,8 +108,10 @@ class ProductList extends React.Component{
         this.setState({search: value})
     }
 
-    componentDidMount(){
-        getProducts().then(products => this.setState({products: products}))
+    async componentDidMount(){
+        
+        const products = await getProducts().then(products => products);
+        this.setState({products: products})
     }
     
     render(){
