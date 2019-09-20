@@ -1,5 +1,4 @@
-//here we create actions
-import {CHANGE_LOGIN_FIELD} from './constants'
+import {CHANGE_LOGIN_FIELD} from './singin.types'
 
 export const setLogin = (status) => ({
     type: CHANGE_LOGIN_FIELD,
