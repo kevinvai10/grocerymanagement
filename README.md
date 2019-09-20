@@ -2,5 +2,5 @@
 
 Also added a few other features.
 
-##Instructions 
+## Instructions 
 yarn install yarn start/npm install npm start
